@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "parser"
+version = "0.1.0"
+description = ""
+authors = ["Ivan Shevchenko <shevchenko.id@dns-shop.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+opencv-python = "^4.10.0.84"
+pydantic = "^2.8.2"
+pydantic-settings = "^2.3.4"
+loguru = "^0.7.2"
+pyyaml = "^6.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

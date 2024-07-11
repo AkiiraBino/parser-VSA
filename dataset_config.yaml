@@ -1,0 +1,17 @@
+dataset_sets:
+  root: "dataset"
+
+  train:
+    dir: "train"
+    number: 1000
+
+  val:
+    dir: "val"
+    number: 100
+
+  imgs: "images"
+  labels: "labels"
+
+
+Настраиваем в файле куда сохранять и сколько
+Запускается парсинг файла, полезные данные сохраняем в pydantic модель
