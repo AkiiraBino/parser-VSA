@@ -6,6 +6,8 @@ repos:
     rev: main
     hooks:
       - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
 
   - repo: https://github.com/commitizen-tools/commitizen
     rev: master
