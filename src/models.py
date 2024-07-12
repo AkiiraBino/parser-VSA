@@ -43,7 +43,7 @@ class Dataset(BaseModel):
     def check_sets(self) -> t.Self:
         if not any(
             True
-            for item, _type in self.__dict__.items()
+            for _type in self.__dict__.values()
             if isinstance(_type, Set)
         ):
             raise ValueError("At least one set must be selected")
@@ -53,7 +53,7 @@ class Dataset(BaseModel):
     @property
     def sets(self) -> list[Set]:
         return [
-            self.__dict__[item]
-            for item, _type in self.__dict__.items()
-            if isinstance(self.__dict__[item], Set)
+            self.__dict__[key]
+            for key in self.__dict__
+            if isinstance(self.__dict__[key], Set)
         ]
