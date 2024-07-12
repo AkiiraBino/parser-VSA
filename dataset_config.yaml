@@ -3,10 +3,6 @@ datasets:
 
   train:
     dir: "train"
-    number: 1000
-
-  val:
-    dir: "val"
     number: 100
 
   images: "images"

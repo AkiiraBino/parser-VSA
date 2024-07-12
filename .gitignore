@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.png
+.ruff_cache
+*config.yaml
 
 # C extensions
 *.so
@@ -175,3 +177,5 @@ __pycache__
 \~$*.xlsx
 /secrets
 /src/.autoenv.zsh
+
+dataset/
