@@ -20,4 +20,4 @@ if __name__ == "__main__":
 
     images_paths: dict[str, str] = get_images_paths(dataset)
     labels_paths: dict[str, str] = get_labels_paths(dataset)
-    parse(images_paths["train"], labels_paths["train"], str(settings.rtsp_url))
+    parse(images_paths["train"], labels_paths["train"], settings.rtsp_url)

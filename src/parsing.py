@@ -1,18 +1,23 @@
 import os
 from datetime import datetime
+from pathlib import PosixPath
 
 import cv2
 from loguru import logger
+from pydantic import FilePath
+from pydantic_core import Url
+
+from settings.config import RtspUrl
 
 
 def parse(
     set_images_path: str,
     set_labels_path: str,
-    uri: str,
+    uri: RtspUrl | str,
     file_format: str = ".png",
     frame_limit: int = 100,
 ) -> None:
-    capture = cv2.VideoCapture(uri)
+    capture = cv2.VideoCapture(str(uri))
     num_of_saved: int = 0
 
     if not capture.isOpened():
@@ -33,9 +38,9 @@ def parse(
         if num_of_saved >= frame_limit:
             break
 
-        name: str = "_".join([uri, str(datetime.now()), file_format]).replace(
-            "/", "-"
-        )
+        name: str = "_".join(
+            [(_get_filename(uri)), str(datetime.now()), file_format]
+        ).replace("/", "-")
 
         images_path: str = os.path.join(set_images_path, name)
         labels_path: str = os.path.join(
@@ -48,3 +53,11 @@ def parse(
         logger.info(f"Saving {name} along the path {images_path}")
 
     capture.release()
+
+
+def _get_filename(uri: RtspUrl | FilePath) -> str:
+    if type(uri) is PosixPath:
+        return uri.stem
+    if type(uri) is Url:
+        return uri.host
+    raise TypeError(f"Invalid uri: {uri}")

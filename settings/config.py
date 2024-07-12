@@ -1,9 +1,22 @@
-from pydantic import AnyUrl, Field, FilePath
+from typing import Annotated
+
+from pydantic import Field, FilePath, UrlConstraints
+from pydantic_core import Url
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+RtspUrl = Annotated[
+    Url,
+    UrlConstraints(
+        allowed_schemes=["rtsp"],
+        default_host="localhost",
+        default_port=554,
+        default_path="/1",
+    ),
+]
 
 
 class Settings(BaseSettings):
-    rtsp_url: AnyUrl | None = Field(validation_alias="RTSP_URL", default=None)
+    rtsp_url: RtspUrl | None = Field(validation_alias="RTSP_URL", default=None)
     video_path: FilePath | None = Field(
         validation_alias="VIDEO_PATH", default=None
     )
