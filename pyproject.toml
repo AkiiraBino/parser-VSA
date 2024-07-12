@@ -17,6 +17,7 @@ pyyaml = "^6.0.1"
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.5.1"
 ruff-lsp = "^0.0.54"
+pre-commit = "^3.7.1"
 
 [tool.ruff]
 line-length = 80
