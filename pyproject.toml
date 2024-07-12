@@ -14,6 +14,25 @@ loguru = "^0.7.2"
 pyyaml = "^6.0.1"
 
 
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.5.1"
+ruff-lsp = "^0.0.54"
+
+[tool.ruff]
+line-length = 80
+extend-exclude = ["hooks/"]
+
+[tool.ruff.lint]
+ignore = ["B008"]
+select = ["A", "B", "C", "E", "F", "I", "Q", "ASYNC", "N", "W", "UP", "T20", "SIM", "ANN204"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402", "F401", "F403"] # unused imports
+"models.py" = ["N805", "A003"] # cls instead self, id for modles
+"schemas.py" = ["N805", "A003"] # cls instead self, id for modles
+"mixins.py" = ["N805", "A003"] # cls instead self, id for modles
+"requests.py" = ["N805", "A003"] # cls instead self, id for modles
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
