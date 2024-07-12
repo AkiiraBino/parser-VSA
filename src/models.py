@@ -42,9 +42,7 @@ class Dataset(BaseModel):
     @model_validator(mode="after")
     def check_sets(self) -> t.Self:
         if not any(
-            True
-            for _type in self.__dict__.values()
-            if isinstance(_type, Set)
+            True for _type in self.__dict__.values() if isinstance(_type, Set)
         ):
             raise ValueError("At least one set must be selected")
         return self
