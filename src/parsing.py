@@ -3,14 +3,17 @@ from datetime import datetime
 
 import cv2
 from loguru import logger
-from pydantic import AnyUrl
 
 
-def parsing(
-    dataset_path, uri: str | AnyUrl, file_format=".png", frame_limit=100
-):
+def parse(
+    set_images_path: str,
+    set_labels_path: str,
+    uri: str,
+    file_format: str = ".png",
+    frame_limit: int = 100,
+) -> None:
     capture = cv2.VideoCapture(uri)
-    num_of_saved = 0
+    num_of_saved: int = 0
 
     if not capture.isOpened():
         logger.error("Error opened capture")
@@ -27,10 +30,21 @@ def parsing(
             logger.error("Status false")
             return None
 
-        if num_of_saved <= frame_limit:
-            name = "_".join([uri, datetime.now(), file_format])
-            path = os.path.join(dataset_path, name)
-            num_of_saved += 1
-            cv2.imwrite(path, frame)
+        if num_of_saved >= frame_limit:
+            break
 
-            logger.info(f"Saving {name} along the path {path}")
+        name: str = "_".join([uri, str(datetime.now()), file_format]).replace(
+            "/", "-"
+        )
+
+        images_path: str = os.path.join(set_images_path, name)
+        labels_path: str = os.path.join(
+            set_labels_path, name.replace("png", "txt")
+        )
+
+        num_of_saved += 1
+        cv2.imwrite(images_path, frame)
+        open(labels_path, "w").close()
+        logger.info(f"Saving {name} along the path {images_path}")
+
+    capture.release()
