@@ -6,7 +6,7 @@ dataset_sets:
     number: 1000
 
   val:
-    dir: "train"
+    dir: "val"
     number: 100
 
   imgs: "images"
