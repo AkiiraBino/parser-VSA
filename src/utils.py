@@ -32,7 +32,7 @@ def create_folders(dataset: Dataset) -> None:
 def create_dir_if_not_exists(path: str) -> None:
     if not os.path.exists(path):
         os.mkdir(path)
-        logger.debug(f"Creating `{path} dir`")
+        logger.info(f"Creating `{path} dir`")
 
 
 def get_images_paths(dataset: Dataset) -> dict[str, str]:
