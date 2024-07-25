@@ -1,4 +1,5 @@
 import os
+from venv import logger
 
 from settings.config import settings
 from src.models import Dataset
@@ -20,4 +21,21 @@ if __name__ == "__main__":
 
     images_paths: dict[str, str] = get_images_paths(dataset)
     labels_paths: dict[str, str] = get_labels_paths(dataset)
-    parse(images_paths["train"], labels_paths["train"], settings.rtsp_url)
+
+    uris = []
+
+    if settings.video_path:
+        uris.append(settings.video_path)
+
+    if settings.rtsp_url:
+        uris.append(settings.rtsp_url)
+
+    for _set in dataset.sets:
+        logger.info(f"Save set {_set}")
+        for uri in uris:
+            parse(
+                set_images_path=images_paths[_set.folder_name],
+                set_labels_path=labels_paths[_set.folder_name],
+                frame_limit=_set.number,
+                uri=uri,
+            )
