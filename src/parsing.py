@@ -13,9 +13,9 @@ from settings.config import RtspUrl
 def parse(
     set_images_path: str,
     set_labels_path: str,
-    uri: RtspUrl | str,
+    frame_limit: int,
+    uri: RtspUrl | str | FilePath,
     file_format: str = ".png",
-    frame_limit: int = 100,
 ) -> None:
     capture = cv2.VideoCapture(str(uri))
     num_of_saved: int = 0
@@ -55,7 +55,7 @@ def parse(
     capture.release()
 
 
-def _get_filename(uri: RtspUrl | FilePath) -> str:
+def _get_filename(uri: RtspUrl | FilePath) -> str | None:
     if type(uri) is PosixPath:
         return uri.stem
     if type(uri) is Url:
