@@ -5,6 +5,10 @@ datasets:
     dir: "train"
     number: 100
 
+  val:
+    dir: "val"
+    number: 10
+
   images: "images"
   labels: "labels"
 

@@ -5,7 +5,7 @@ __pycache__/
 *.png
 .ruff_cache
 *config.yaml
-
+dataset_config.yaml
 # C extensions
 *.so
 
