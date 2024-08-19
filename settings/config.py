@@ -1,8 +1,11 @@
 from typing import Annotated
 
+from dotenv import load_dotenv
 from pydantic import Field, FilePath, UrlConstraints
 from pydantic_core import Url
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+load_dotenv(".env", override=True)
 
 RtspUrl = Annotated[
     Url,
