@@ -1,4 +1,5 @@
 import os
+import time
 from datetime import datetime
 from pathlib import PosixPath
 
@@ -32,8 +33,10 @@ def parse(
         status, frame = capture.read()
 
         if not status:
-            logger.error("Status false")
-            return None
+            logger.error("Status false. Recreate capture.")
+            time.sleep(1)
+            capture = cv2.VideoCapture(str(uri))
+            continue
 
         if num_of_saved >= frame_limit:
             break
@@ -50,7 +53,7 @@ def parse(
         num_of_saved += 1
         cv2.imwrite(images_path, frame)
         open(labels_path, "w").close()
-        logger.info(f"Saving {name} along the path {images_path}")
+        logger.info(f"Saving {name} along the path {images_path}. Num saved: {num_of_saved}")
 
     capture.release()
 

@@ -30,6 +30,8 @@ if __name__ == "__main__":
     if settings.rtsp_url:
         uris.append(settings.rtsp_url)
 
+    if settings.folder_with_video:
+        uris.extend(settings.folder_with_video.glob("*.mp4"))
     for _set in dataset.sets:
         logger.info(f"Save set {_set}")
         for uri in uris:

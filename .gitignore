@@ -179,3 +179,4 @@ __pycache__
 /src/.autoenv.zsh
 
 dataset/
+video/
